@@ -3,6 +3,12 @@
 #include <string>
 // #include <filesystem>
 
+/* TODO: 
+1. switch to using <filesystem> instead of using the windows API 
+2. for "new" option, create a new directory with the name specified by the user with -n flag 
+3. general cleanup of the code
+*/
+
 #if defined(_WIN32) || defined(_WIN64)
     // #include <fileapi.h> NOTE: does not need to be added already available via <Windows.h>
     #include <Windows.h> 
