@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-// #include <filesystem>
+#include <filesystem>
 
 /* TODO: 
 1. switch to using <filesystem> instead of using the windows API 
@@ -17,6 +17,7 @@
     #include <dirent.h>
 #endif
 
+#include "nlohmann/json.hpp"
 #include "options.h"
 
 bool directoryExists(const char* path);
@@ -24,7 +25,7 @@ bool directoryExists(const char* path);
 int main(int argc, char* argv[])
 {
     // std::filesystem::path wd = std::filesystem::current_path(); 
-    
+
     char path[MAX_PATH];    
     GetCurrentDirectoryA(MAX_PATH, path);
 
@@ -38,7 +39,7 @@ int main(int argc, char* argv[])
 
     if (!strcmp(argv[1], "new"))
     {
-        working_directory += "\\project";
+        working_directory += "\\test_project";
 
         std::cout << working_directory << "\n";
 

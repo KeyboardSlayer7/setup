@@ -1,0 +1,6 @@
+{
+    "-n": "NAME", 
+    "-L": "LINK_DIRECTORIES",
+    "-l": "LINK_LIBRARIES",
+    "-I": "INCLUDE_DIRECTORIES"
+}

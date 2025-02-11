@@ -3,6 +3,8 @@
 #include <vector>
 #include <Windows.h>
 #include <sstream>
+#include <unordered_map>
+#include <fstream>
 
 #include "options.h"
 
@@ -164,4 +166,42 @@ std::string createCMakeListstxt(std::vector<std::vector<std::string>>& options, 
 
     // return output.str();
     return cmake_template; 
+}
+
+std::string createCmakeliststxt(std::unordered_map<std::string, std::vector<std::string>>& options, std::vector<std::string>& source_files)
+{
+    std::ifstream cmakelists_template("cmake.template");
+
+    cmakelists_template.seekg(0, std::ios::end);
+    size_t size = cmakelists_template.tellg();
+    cmakelists_template.seekg(0, std::ios::beg);
+    
+    char* buffer = new char[size + 1];
+    buffer[size] = '\0';
+
+    cmakelists_template.read(buffer, size);
+
+    std::string cmake_template = std::string(buffer);
+
+    delete[] buffer;
+
+    size_t start = 0, end = 0;
+
+    while (true)
+    {
+        start = cmake_template.find("{{", end);
+        end = cmake_template.find("}}", start);
+
+        if (start == std::string::npos || end == std::string::npos)
+        {
+            break;
+        }
+
+        std::string key = cmake_template.substr(start + 2, end - start - 2);
+        std::string value = combineStrings(options[key], 0);
+
+        cmake_template.replace(start, end - start + 2, value);
+    }
+
+    return cmake_template;
 }
