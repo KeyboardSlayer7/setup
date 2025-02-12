@@ -1,9 +1,11 @@
 #ifndef OPTIONS_H
 #define OPTIONS_H
 
+#include <unordered_map>
 #include <string>
 #include <vector>
 #include <cstdint>
+#include <filesystem>
 
 enum Values
 {
@@ -14,9 +16,16 @@ enum Values
     NUM_VALUES
 };
 
-std::vector<std::vector<std::string>> parseOptions(char** options, int num_options);
-std::vector<std::string> getSourceFiles(const std::string& path);
-std::string combineStrings(std::vector<std::string>& strings, uint8_t spaces);
-std::string createCMakeListstxt(std::vector<std::vector<std::string>>& options, std::vector<std::string>& source_files);
+struct ProgramContext
+{
+    std::string project_name;
+    std::unordered_map<std::string, std::vector<std::string>> options;
+    std::filesystem::path working_directory, source_directory;
+};
+
+void parseOptions(ProgramContext& context, int argc, char** argv);
+void getSourceFiles(ProgramContext& context);
+std::string combineStrings(std::vector<std::string>& strings, std::string separator, uint8_t spaces);
+void createCMakeListstxt(ProgramContext& context);
 
 #endif
