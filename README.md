@@ -1,6 +1,6 @@
 # Setup
 
-Setup is a project initialisation program for CMake, inspired by the Rust language's cargo and gcc/g++ written in C++.
+Setup is a project initialisation program for CMake, inspired by the Rust language's cargo and gcc/g++ written in C++ using nlohmann/json.
 
 ## Why
 
