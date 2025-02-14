@@ -30,22 +30,30 @@ void parseOptions(ProgramContext& context, int argc, char** argv)
     }
 }
 
+// void getSourceFiles(ProgramContext& context)
+// {   
+//     WIN32_FIND_DATAA file_data;
+
+//     std::string path = context.working_directory.string() + "\\*";
+//     HANDLE handle = FindFirstFileA((char*)path.c_str(), &file_data);
+
+//     int ret;
+//     while ((ret = FindNextFileA(handle, &file_data)) != 0)
+//     {
+//         if (!strcmp(file_data.cFileName, ".."))
+//         {
+//             continue;
+//         }
+//         context.options["SOURCE_FILES"].push_back(file_data.cFileName);        
+//     } 
+// }
+
 void getSourceFiles(ProgramContext& context)
-{   
-    WIN32_FIND_DATAA file_data;
-
-    std::string path = context.working_directory.string() + "\\*";
-    HANDLE handle = FindFirstFileA((char*)path.c_str(), &file_data);
-
-    int ret;
-    while ((ret = FindNextFileA(handle, &file_data)) != 0)
+{
+    for (auto& file : std::filesystem::directory_iterator(context.working_directory))
     {
-        if (!strcmp(file_data.cFileName, ".."))
-        {
-            continue;
-        }
-        context.options["SOURCE_FILES"].push_back(file_data.cFileName);        
-    } 
+        context.options["SOURCE_FILES"].push_back(file.path().filename().string());
+    }
 }
 
 std::string combineStrings(std::vector<std::string>& strings, std::string separator, uint8_t spaces)

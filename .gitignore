@@ -1,3 +1,6 @@
 /.vscode
 *.exe
 /build
+*.pdb
+*.bat
+*.sh
