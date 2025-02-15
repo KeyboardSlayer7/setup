@@ -121,6 +121,14 @@ void createCMakeListstxt(ProgramContext& context)
         }
 
         std::string key = cmake_template.substr(start + 2, end - start - 2);
+
+        if (context.options[key].empty())
+        {
+            cmakelists_txt.write(cmake_template.c_str() + previous_end, end + 2 - previous_end);
+            previous_end = end + 2;
+            continue;
+        }
+
         std::string value = "";
 
         if (key == "SOURCE_FILES")

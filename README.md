@@ -33,9 +33,17 @@ Requirements
 - A C++17 compliant compiler
 - CMake.
 
+Clone repo
+
+`git clone https://github.com/KeyboardSlayer7/setup.git`
+
 CMake
 
 `cmake -B build`
+
+`cmake --build build`
+
+Once these step are complete the directory which holds the executable should be added to your systems PATH, making the program executable from anywhere.
 
 ## How
 
