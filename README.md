@@ -1,6 +1,7 @@
 # Setup
 
-Setup is a project initialisation program for CMake, inspired by the Rust language's cargo and gcc/g++ written in C++ using nlohmann/json.
+Setup is a project initialisation program for CMake, inspired by the Rust language's Cargo and gcc/g++ written in C++ using [nlohmann/json](https://github.com/nlohmann/json). 
+Setup automates the process of setting up CMake files, so that you can focus on actual programming instead of repetitive boilerplate.
 
 ## Why
 
@@ -12,13 +13,35 @@ I got tired of rewriting very similar CMake files and decided to automate the pr
 - **Customisable**: Setup allows you to add new options, allowing for CMake files to be generated just the way you like. [See more here.](#customising) 
 - **Beginner Friendly**: If you are new to C/C++ and/or build systems like CMake, this can be a great place to start as all the hard work is done for you. All you need to do is learn what the options do.
 
+## Porject Status
+
+:white_check_mark: What Works
+
+- Creating a new project
+- Initialising existing project
+- CMakeLists.txt generation
+
+:construction: In Progress
+
+- Improved error handling
+- Adding support for verbose options
+- Adding a `--help` option, that works with custom commands 
+
+:bug: Known Issues 
+
+-  
+
+:bulb: Future Plans
+
+- Maintainance
+
 ## Usage
 
-Creating a new project from scratch
+Create a New Project
 
 `setup new -n name -I /include -L /lib -l lib_name_1 lib_name_2`
 
-Initialising an alreay existing project
+Initialise an Exisiting Project
 
 `setup init -n name -I /include -L /lib -l lib_name_1 lib_name_2`
 
@@ -26,6 +49,7 @@ Initialising an alreay existing project
 
 >[!NOTE]
 >This project uses std::filesystem, which is only available from C++17 onwards. Ensure your compiler supports C++17.
+
 >Some MinGW and gcc/g++ 8 compilers can have some trouble compiling with std::filesystem, even with C++17 support.
 
 Requirements

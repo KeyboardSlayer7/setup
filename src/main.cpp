@@ -28,18 +28,26 @@ bool directoryExists(const char* path);
 
 int main(int argc, char* argv[])
 {
+    if (argc < 2)
+    {
+        std::cout << "[ERROR] No command provided\n";
+        std::cout << "\tUsage: setup <command> [options]\n";
+        std::exit(EXIT_FAILURE);
+    }
+
+    if (strcmp(argv[1], "new") && strcmp(argv[1], "init"))
+    {
+        std::cout << "[ERROR] Command not recognised: " << argv[1] << "\n";
+        std::cout << "\tUsage: setup <command> [options]\n";
+        std::exit(EXIT_FAILURE);
+    }
+
     ProgramContext context;
     context.working_directory = std::filesystem::current_path();
     context.source_directory = getSourceDirectory();
 
     parseOptions(context, argc, argv);
-    context.project_name = context.options["NAME"][0];
-    
-    if (strcmp(argv[1], "new") && strcmp(argv[1], "init"))
-    {
-        std::cout << "Command not recognised: " << argv[1] << "\n";
-        std::exit(EXIT_FAILURE);
-    } 
+    context.project_name = context.options["NAME"][0]; 
 
     if (!strcmp(argv[1], "new"))
     {
