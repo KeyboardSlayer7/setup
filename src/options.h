@@ -25,7 +25,7 @@ struct ProgramContext
 
 void parseOptions(ProgramContext& context, int argc, char** argv);
 void getSourceFiles(ProgramContext& context);
-std::string combineStrings(std::vector<std::string>& strings, std::string separator, uint8_t spaces);
+std::string combineStrings(std::vector<std::string>& strings, std::string separator, uint8_t where);
 void createCMakeListstxt(ProgramContext& context);
 
 #endif

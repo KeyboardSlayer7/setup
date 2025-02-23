@@ -35,6 +35,7 @@ int main(int argc, char* argv[])
         std::exit(EXIT_FAILURE);
     }
 
+    // Yes I know hardcoding the commands is bad, but theres only two commands so its fine
     if (strcmp(argv[1], "new") && strcmp(argv[1], "init"))
     {
         std::cout << "[ERROR] Command not recognised: " << argv[1] << "\n";

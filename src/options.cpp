@@ -56,15 +56,20 @@ void getSourceFiles(ProgramContext& context)
     }
 }
 
-std::string combineStrings(std::vector<std::string>& strings, std::string separator, uint8_t spaces)
+// where works as follows:
+// where follows the look of the value in binary, and should only be 0, 1, 2, or 3;
+// 1 - separator is added between string and at the end (01);  
+// 2 - separator is added between strings and at the start (10);
+// 3 - separator is added between strings and at the start and end (11);
+std::string combineStrings(std::vector<std::string>& strings, std::string separator, uint8_t where)
 {
     std::string output;
 
-    if (spaces > 3)
+    if (where > 3)
     {
         return "";
     }
-    else if (spaces == 2 || spaces == 3)
+    else if (where == 2 || where == 3)
     {
         output += separator;
     }
@@ -78,7 +83,7 @@ std::string combineStrings(std::vector<std::string>& strings, std::string separa
         else 
         {
             output += strings[i];
-            if (spaces == 3 || spaces == 1)
+            if (where == 3 || where == 1)
             {
                 output += separator;
             }
@@ -106,6 +111,7 @@ void createCMakeListstxt(ProgramContext& context)
 
     delete[] buffer;
 
+    // tracks position of the wildcards
     size_t previous_end = 0;
     size_t start = 0, end = 0;
 
@@ -122,9 +128,12 @@ void createCMakeListstxt(ProgramContext& context)
 
         std::string key = cmake_template.substr(start + 2, end - start - 2);
 
+        // if the options for a given wildcard are empty, the wildcard stays in the CMakelists.txt
         if (context.options[key].empty())
         {
             cmakelists_txt.write(cmake_template.c_str() + previous_end, end + 2 - previous_end);
+
+            // offset the previous_end by 2 to skip the "}}" characters
             previous_end = end + 2;
             continue;
         }
@@ -139,10 +148,12 @@ void createCMakeListstxt(ProgramContext& context)
         {
             value = combineStrings(context.options[key], " ", 0);
         }
- 
+        
+        // replace the wildcard with the value
         cmakelists_txt.write(cmake_template.c_str() + previous_end, start - previous_end);
         cmakelists_txt.write(value.c_str(), value.length());
 
+        // offset the previous_end by 2 to skip the "}}" characters
         previous_end = end + 2;
     }
     
