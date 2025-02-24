@@ -18,7 +18,7 @@ enum Values
 
 struct ProgramContext
 {
-    std::string project_name;
+    std::string command, project_name;
     std::unordered_map<std::string, std::vector<std::string>> options;
     std::filesystem::path working_directory, source_directory;
 };

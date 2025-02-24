@@ -22,8 +22,20 @@ set(SOURCES
     ${SOURCE_DIR}/main.cpp
     ${SOURCE_DIR}/options.h
     ${SOURCE_DIR}/options.cpp
+    ${SOURCE_DIR}/directories.h
+    ${SOURCE_DIR}/directories.cpp
+    ${SOURCE_DIR}/commands.h
+    ${SOURCE_DIR}/commands.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${json_SOURCE_DIR}/single_include)
+
+set(FILES_TO_COPY ${CMAKE_SOURCE_DIR}/options.json ${CMAKE_SOURCE_DIR}/cmake.template)
+
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    ${FILES_TO_COPY}
+    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}
+)

@@ -13,6 +13,8 @@ using json = nlohmann::json;
 
 void parseOptions(ProgramContext& context, int argc, char** argv)
 {
+    context.command = std::string(argv[1]);
+
     std::ifstream options_file(context.source_directory.string() + "\\options.json");
     json options = json::parse(options_file);
 
