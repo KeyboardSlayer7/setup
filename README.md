@@ -82,3 +82,7 @@ This project offers you the ability to customise how your CMake files are genera
 Adding new options can be done in the `options.json` file located next to the executable. When adding a new option ensure you add the flag and the corresponding wildcard as a key-pair.
 
 If you have added a new option to `options.json`, you can make use of your new option by modifying the `cmake.template` file. When modifying the `cmake.template` file ensure any wildcards you add match the wildcard in the `options.json` file, and also ensure wildcard in the `cmake.template` file are wrapped with a "{{" and "}}" or you may run into some trouble.
+
+## Feedback
+
+I've only been working with C/C++ for a few years and am still fairly new to CMake, so I'd love to hear thoughts! If you find any bugs or have any suggestions, feel free to email me at keyboardslayer7@protonmail.com. Any feedback, big or small, is greatly appreciated!
