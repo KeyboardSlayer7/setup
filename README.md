@@ -49,7 +49,6 @@ Initialise an Exisiting Project
 
 >[!NOTE]
 >This project uses std::filesystem, which is only available from C++17 onwards. Ensure your compiler supports C++17.
-
 >Some MinGW and gcc/g++ 8 compilers can have some trouble compiling with std::filesystem, even with C++17 support.
 
 Requirements
