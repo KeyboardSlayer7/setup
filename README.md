@@ -29,7 +29,7 @@ I got tired of rewriting very similar CMake files and decided to automate the pr
 
 :bug: Known Issues 
 
--  
+- Additional bytes being written at the end of generated CMakeLists.txt 
 
 :bulb: Future Plans
 
