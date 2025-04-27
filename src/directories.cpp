@@ -2,6 +2,7 @@
 
 #include "directories.h"
 
+#if defined(_WIN32) || defined(_WIN64)
 std::filesystem::path getSourceDirectoryWindows()
 {
     char buffer[MAX_PATH];
@@ -19,6 +20,7 @@ std::filesystem::path getSourceDirectoryWindows()
 
     return output;
 }
+#endif
 
 std::filesystem::path getSourceDirectoryLinux()
 {
@@ -27,6 +29,7 @@ std::filesystem::path getSourceDirectoryLinux()
     return path;
 }
 
+#if defined(_WIN32) || defined(_WIN64)
 bool directoryExists(const char* path)
 {
     DWORD result = GetFileAttributesA(path);
@@ -39,3 +42,4 @@ bool directoryExists(const char* path)
 
     return false;
 }
+#endif

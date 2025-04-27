@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <filesystem>
+#include <cstring>
 
 #include "options.h"
 #include "directories.h"
